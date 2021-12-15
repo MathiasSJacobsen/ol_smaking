@@ -1,12 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import { ChakraProvider, ColorModeScript } from '@chakra-ui/react'
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
+import Scoreboard from './Scoreboard';
+import SignIn from './SignIn';
+import Voting from './Voting';
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ChakraProvider>
+      <ColorModeScript initialColorMode="system" />
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<SignIn/>}/>
+          <Route path="/scoreboard" element={<Scoreboard />}/>  
+          <Route path="/hemmelig" element={<Voting />}/>
+        </Routes>
+      </BrowserRouter>
+    </ChakraProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
