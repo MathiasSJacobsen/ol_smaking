@@ -3,20 +3,19 @@ import {
   Heading,
   HStack,
   Input,
-  StackDivider,
   useToast,
   VStack,
 } from "@chakra-ui/react";
 import { getAuth, User } from "firebase/auth";
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
-import { addUsers, signIn } from "./backend/Firebase";
+import { signIn } from "./backend/Firebase";
 
 const SignIn = () => {
   const [eMail, seteMail] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState<User | null>(getAuth().currentUser)
-  const toast = useToast()
+  const [user, setUser] = useState<User | null>(getAuth().currentUser);
+  const toast = useToast();
 
   const errors = {
     eMail: {
@@ -28,20 +27,19 @@ const SignIn = () => {
       message: "There is something worng with the password",
     },
   };
-  
+
   function checkErrors() {
-    if (!eMail.includes('@') || !eMail.includes('.')){
-        errors.eMail.error = true
-        
+    if (!eMail.includes("@") || !eMail.includes(".")) {
+      errors.eMail.error = true;
     }
   }
 
   function handleSubmit(email: string, password: string) {
     signIn(email, password);
-    const auth = getAuth()
+    const auth = getAuth();
     console.log(auth.currentUser);
-    
-    setUser(auth.currentUser)
+
+    setUser(auth.currentUser);
   }
 
   return (
@@ -78,34 +76,30 @@ const SignIn = () => {
       <Button
         onClick={(event) => {
           event.preventDefault();
-          checkErrors()
-          if (errors.eMail.error) {
-              toast({
-                  title: errors.eMail.message,
-                  status: 'error',
-                  duration: 9000,
-                  isClosable: true,
-                })
-                return // this needs to be the last check
-            }
-            handleSubmit(eMail, password)
+          checkErrors();
+          if (errors.eMail.error) {
+            toast({
+              title: errors.eMail.message,
+              status: "error",
+              duration: 9000,
+              isClosable: true,
+            });
+            return; // this needs to be the last check
+          }
+          handleSubmit(eMail, password);
         }}
       >
         Sign in
       </Button>
       <Button
         onClick={(event) => {
-          event.preventDefault()
-            console.log(user);
-            
+          event.preventDefault();
+          console.log(user);
         }}
       >
         check
       </Button>
-      {user && (
-          <Navigate to={"/scoreboard"} replace={true}/>
-      )}
-      
+      {user && <Navigate to={"/scoreboard"} replace={true} />}
     </VStack>
   );
 };

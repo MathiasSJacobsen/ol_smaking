@@ -1,4 +1,3 @@
-import { HStack, VStack, Text, StackDivider, Spacer } from "@chakra-ui/layout";
 import {
   Table,
   TableCaption,

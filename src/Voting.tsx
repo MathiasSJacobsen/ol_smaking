@@ -8,15 +8,8 @@ import {
   useToast,
   VStack,
 } from "@chakra-ui/react";
-import { getAuth } from "firebase/auth";
 import { QueryDocumentSnapshot, DocumentData } from "firebase/firestore";
-import {
-  ReactChild,
-  ReactFragment,
-  ReactPortal,
-  useEffect,
-  useState,
-} from "react";
+import { useEffect, useState } from "react";
 import { FaArrowDown } from "react-icons/fa";
 import { fetchAllBeers, setCurrentBeer } from "./backend/Firebase";
 
@@ -38,7 +31,7 @@ const Voting = () => {
         duration: 2000,
         isClosable: true,
       });
-      return
+      return;
     }
     setCurrentBeer(object.name, object.id);
     toast({
@@ -65,7 +58,7 @@ const Voting = () => {
               {beers?.map((doc) => (
                 <MenuItem
                   onClick={() => {
-                    setSelected({name:doc.data().name, id:doc.id});
+                    setSelected({ name: doc.data().name, id: doc.id });
                   }}
                 >
                   {doc.data().name}
