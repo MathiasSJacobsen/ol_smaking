@@ -17,7 +17,7 @@ const ScoreboardList = () => {
       raters: [
         ["Ask", 3],
         ["Mathias", 7],
-        ["Torjus", 1],
+        ["Torjus", null],
 
       ],
     },
@@ -32,26 +32,8 @@ const ScoreboardList = () => {
     },
   ];
 
-  const t = (
-    <VStack
-      divider={<StackDivider />}
-      borderColor="gray.100"
-      borderWidth="1px"
-      p={4}
-      borderRadius="2xl"
-      w="100%"
-      maxW={{ base: "90vw", sm: "80vw", lg: "50vw", xl: "40vw" }}
-      alignItems="stretch"
-    >
-      {beers.map((beer) => (
-        <HStack>
-          <Text>{beer.name}</Text>
-          <Spacer />
-          <Text>HEieh</Text>
-        </HStack>
-      ))}
-    </VStack>
-  );
+
+
 
   return (
     <Table
@@ -69,7 +51,6 @@ const ScoreboardList = () => {
           <Th isNumeric>Ask</Th>
           <Th isNumeric>Mathias</Th>
           <Th isNumeric>Torjus</Th>
-
         </Tr>
       </Thead>
       <Tbody>
@@ -77,11 +58,10 @@ const ScoreboardList = () => {
           <Tr>
             <Td>{beer.name}</Td>
             {beer.raters.map((raters) => (
-              <Td key={beer.id} isNumeric>{raters[1]}</Td>
+              <Td key={beer.id} isNumeric>{raters[1] ? raters[1] : "-"}</Td>
             ))}
           </Tr>
         ))}
-        
       </Tbody>
       <Tfoot>
         <Tr>
@@ -89,7 +69,6 @@ const ScoreboardList = () => {
           <Th isNumeric>Ask</Th>
           <Th isNumeric>Mathias</Th>
           <Th isNumeric>Torjus</Th>
-
         </Tr>
       </Tfoot>
     </Table>

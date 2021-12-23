@@ -11,9 +11,10 @@ import {
 import { QueryDocumentSnapshot, DocumentData } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { FaArrowDown } from "react-icons/fa";
-import { fetchAllBeers, setCurrentBeer } from "./backend/Firebase";
+import { fetchAllBeers, setCurrentBeer, vote } from "./backend/Firebase";
+import { CRITERIAS } from "./enum/VotesEnum";
 
-const Voting = () => {
+const Hemmelig = () => {
   const [beers, setBeers] =
     useState<Array<QueryDocumentSnapshot<DocumentData>>>();
   const [selected, setSelected] = useState({ name: "", id: "" });
@@ -22,6 +23,8 @@ const Voting = () => {
   useEffect(() => {
     fetchAllBeers(setBeers);
   }, []);
+
+
 
   function sendToFirebase(object: { name: string; id: string }) {
     if (object.name === "") {
@@ -80,8 +83,20 @@ const Voting = () => {
       >
         Set selected beer
       </Button>
+      <Button
+        onClick={(e) => {
+          vote({
+            beer: "Leffe",
+            user: "Mathias",
+            poeng: 3,
+            type: CRITERIAS.SMAK,
+          })
+        }
+      }
+      >Tesing button</Button>
+
     </VStack>
   );
 };
 
-export default Voting;
+export default Hemmelig;

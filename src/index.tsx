@@ -10,7 +10,8 @@ import {
 import reportWebVitals from './reportWebVitals';
 import Scoreboard from './Scoreboard';
 import SignIn from './SignIn';
-import Voting from './Voting';
+import Hemmelig from './Hemmelig';
+import Voting from './components/Voting';
 
 
 ReactDOM.render(
@@ -21,7 +22,9 @@ ReactDOM.render(
         <Routes>
           <Route path='/' element={<SignIn/>}/>
           <Route path="/scoreboard" element={<Scoreboard />}/>  
-          <Route path="/hemmelig" element={<Voting />}/>
+          <Route path="/hemmelig" element={<Hemmelig />}/>
+          <Route path="/vote" element={<Voting />}/>
+
         </Routes>
       </BrowserRouter>
     </ChakraProvider>
